@@ -1,0 +1,133 @@
+.dom_header {
+    width: inherit;
+    display: flex;
+    height: 0px;
+    /* margin: 0px 15px; */
+    flex-direction: column;
+}
+
+#header {
+    width: inherit;
+    display: flex;
+    height: 60px;
+    /* margin: 0px 15px; */
+    flex-direction: column;
+}
+
+.download_text {
+    height: 30px;
+    display: flex;
+    width: auto;
+    background: transparent;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.download_text .download {
+    color: #ADBFE1;
+    display: block;
+    background-color: black;
+    padding: 10px;
+    text-decoration: auto;
+    color: #ffff;
+}
+
+/* Social Media */
+
+#social {
+    text-align: center;
+    background-color: #080808;
+}
+
+.smGlobalBtn {
+    /* global button class */
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    /* add border to the buttons */
+    box-shadow: 0 3px 3px #999;
+    padding: 0px;
+    text-decoration: none;
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+    font-weight: normal;
+    line-height: 2em;
+    border-radius: 27px;
+    -moz-border-radius: 27px;
+    -webkit-border-radius: 27px;
+}
+
+/* facebook button class*/
+.facebookBtn {
+    background: #4060A5;
+}
+
+.facebookBtn:before {
+    /* use :before to add the relevant icons */
+    font-family: "FontAwesome";
+    content: "f";
+    /* add facebook icon */
+}
+
+.facebookBtn:hover {
+    color: #4060A5;
+    background: #fff;
+    border-color: #4060A5;
+    /* change the border color on mouse hover */
+}
+
+/* twitter button class*/
+.twitterBtn {
+    background: #00ABE3;
+}
+
+.twitterBtn:before {
+    font-family: "FontAwesome";
+    content: "t";
+    /* add twitter icon */
+
+}
+
+.twitterBtn:hover {
+    color: #00ABE3;
+    background: #fff;
+    border-color: #00ABE3;
+}
+
+/* google plus button class*/
+.googleplusBtn {
+    background: #e64522;
+}
+
+.googleplusBtn:before {
+    font-family: "FontAwesome";
+    content: "g";
+    /* add googleplus icon */
+}
+
+.googleplusBtn:hover {
+    color: #e64522;
+    background: #fff;
+    border-color: #e64522;
+}
+
+/* linkedin button class*/
+.linkedinBtn {
+    background: #0094BC;
+}
+
+.linkedinBtn:before {
+    font-family: "FontAwesome";
+    content: 'in';
+    /* add linkedin icon */
+}
+
+.linkedinBtn:hover {
+    color: #0094BC;
+    background: #fff;
+    border-color: #0094BC;
+}
