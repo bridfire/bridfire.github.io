@@ -168,7 +168,7 @@ function domParsePosts(data = []) {
 
     let newDateConverted = [] // here we pass the date already converted/ does not modify the original array when using sort
     let elementContainer = []
-    newArray.sort((elementA, elementB) => elementA > elementB ? 1 : -1).forEach((elemet, index, arr) => {
+    newArray.sort((elementA, elementB) => elementA.formatDate > elementB.formatDate ? -1 : 1).forEach((elemet, index, arr) => {
         //const { year, monthIndex, day, hour, minutes } = elemet.date
         let date = dateConvertion(elemet.date)
         let dateDatePart = date.toDateString().split(' ')
