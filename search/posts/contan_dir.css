@@ -1,0 +1,57 @@
+#footer-bgcontent {
+    height: 110px;
+    width: -webkit-fill-available;
+    position: absolute;
+    background-color: #080808;
+    display: flex;
+    color: #ffff;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contact_msg {
+    display: block;
+    padding: 59px;
+}
+
+.form {
+    background-color: #15172b;
+    border-radius: 0px;
+    box-sizing: border-box;
+    /* height: 500px; */
+    padding: 20px;
+    width: 70%;
+    margin-bottom: 30px;
+}
+
+#text_box {
+    display: flex;
+    height: 260px;
+    margin-top: 25px;
+    text-align: -webkit-auto;
+    text-align-last: start;
+}
+
+#page {
+    width: auto;
+    margin: 0px 20px auto;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    padding-top: 10%;
+    flex-direction: column;
+}
+
+@media (min-width: 0px) and (max-width: 650px) {
+
+    .form {
+        background-color: #15172b;
+        border-radius: 0px;
+        box-sizing: border-box;
+        /* height: 500px; */
+        padding: 20px;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+}

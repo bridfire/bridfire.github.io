@@ -62,8 +62,7 @@ function domFooter(data = [], sorElementByLastDate = []) {
         </div>`
         if (index + 1 <= FOOTER_CONTENT_AMOUNT_1) foorter_1.push(HTML_TEM)
     })
-    DOM_FOOTER_1.insertAdjacentHTML('beforeend', foorter_1)
-
+    DOM_FOOTER_1 ? DOM_FOOTER_1.insertAdjacentHTML('beforeend', foorter_1) : ''
 
     let foorter_2 = []
     sorElementByLastDate.reverse().forEach((element, index, __) => {
@@ -78,7 +77,7 @@ function domFooter(data = [], sorElementByLastDate = []) {
     })
 
 
-    DOM_FOOTER_2.insertAdjacentHTML('beforeend', foorter_2)
+    DOM_FOOTER_2 ? DOM_FOOTER_2.insertAdjacentHTML('beforeend', foorter_2) : ''
 }
 
 
@@ -143,10 +142,9 @@ function domParsePosts(data = []) {
         elementContainer.push(placeHolderPost)
         newDateConverted.push({ dataElement: elemet, dataDate: date })
     })
-
-    postsContainer.insertAdjacentHTML('beforeend', elementContainer.join(' '))
+    postsContainer ? postsContainer.insertAdjacentHTML('beforeend', elementContainer.join(' ')) : ''
     domFooter(data, sortter)
-    domSideBarParse(data)
+    postsContainer ? domSideBarParse(data) : ''
 
 }
 
