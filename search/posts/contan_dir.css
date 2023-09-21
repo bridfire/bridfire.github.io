@@ -34,16 +34,29 @@
 }
 
 #page {
-    width: auto;
+    /* width: 65%; */
     margin: 0px 20px auto;
-    padding: 0px;
+    padding: 13px 20px auto;
+    /* padding: 0px; */
     display: flex;
     justify-content: center;
-    padding-top: 10%;
+    /* padding-top: 10%; */
     flex-direction: column;
+    padding: 70px 300px 3px;
+    /* padding: 20%; */
 }
 
 @media (min-width: 0px) and (max-width: 650px) {
+
+    #page {
+        width: auto;
+        margin: 0px 20px auto;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        padding-top: 10%;
+        flex-direction: column;
+    }
 
     .form {
         background-color: #15172b;

@@ -110,7 +110,7 @@ function domSideBarParse(data = []) {
 
 //The domParsePosts function creates all HTML interactions through the data objects.//
 function domParsePosts(data = []) {
-    footer.insertAdjacentHTML('afterbegin', `<p>&copy; copyright ${cpn} team ${curretnDate.getFullYear()} <a href="#" rel="nofollow">Desing</a>.</p>`)
+    footer.insertAdjacentHTML('afterbegin', `<p>&copy; copyright ${cpn} team ${curretnDate.getFullYear()} <a href="#" rel="nofollow">Desing</a>.</p> <spam><a href="../../privacy_policy.html">Política de Privacidad</a></spam>`)
 
     let newArray = [...data].reduce((acc, crr) => {
         let objectDate = { 'formatDate': dateConvertion(crr.date) }

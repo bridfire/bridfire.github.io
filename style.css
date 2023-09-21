@@ -152,7 +152,6 @@ hr {
 	background-color: #000000;
 }
 
-
 /* 
 #menu ul:hover .active { */
 /* margin: 0;
@@ -1745,4 +1744,11 @@ img {vertical-align: middle;}
 	color: #0094BC;
 	background: #fff;
 	border-color: #0094BC;
+}
+
+.activity_box {
+	display: flex;
+	width: -webkit-fill-available;
+	background-color: #080808;
+	justify-content: space-around;
 }

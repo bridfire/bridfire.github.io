@@ -3,6 +3,9 @@ const MAX_OF_INITITAL_POST = 4//Posts
 let { browser, device, os, source } = detect.parse(navigator.userAgent)
 
 
+//Implement Bad Practica//
+let status_counter = 0
+
 const cpn = 'Bridfire'
 const elementLoadPage = document.querySelector('.box')
 let slideIndex = 0;
@@ -10,7 +13,7 @@ let slides = document.getElementsByClassName("mySlides");
 let slidesContainer = document.querySelector('.slideshow-container')
 let postsContainer = document.querySelector('#content')
 let pagination = document.querySelector('.pagination')
-
+let doc_pagination_next = document.getElementById('sub_pag_id')
 let menuMobile = document.querySelector('.overlay')
 let domMenu = document.querySelector('.closebtn')
 let menuDesk = document.querySelector('.menu_desk')
@@ -62,24 +65,6 @@ let showSlides = () => {
     slides[slideIndex - 1].style.display = "block";
     setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
-
-
-let createCopy = []
-let paginationContent = 0
-const paginate = ((items, page = 1, perPage = 0) => {
-    createCopy = items
-    if (page === 1) {
-        createCopy = items;
-        paginationContent = items.length % perPage === 0 ?
-            Math.floor(items.length / perPage) : Math.floor(items.length / perPage) + 1
-    }
-    if (perPage > createCopy.length) return { pagination: createCopy, maxOfPages: paginationContent }
-    if (page >= paginationContent) return { pagination: createCopy.slice(perPage * (page - 1)), maxOfPages: paginationContent }
-    let itemsSliced = createCopy.slice(perPage * (page - 1), perPage * page)
-    console.log(`implemented = splice(${perPage * (page - 1)}, ${perPage * page})`)
-
-    return { pagination: itemsSliced, maxOfPages: paginationContent }
-});
 
 
 
@@ -159,7 +144,7 @@ function domSideBarParse(data = []) {
 
 
 //The domParsePosts function creates all HTML interactions through the data objects.//
-function domParsePosts(data = []) {
+function domParsePosts(data = [], from_pagination = false) {
     let newArray = [...data].reduce((acc, crr) => {
         let objectDate = { 'formatDate': dateConvertion(crr.date) }
         return [...acc, Object.assign(crr, objectDate)]
@@ -176,7 +161,7 @@ function domParsePosts(data = []) {
 
         //Are sort by Date (Current ->to-> the Last)
         let placeHolderPost = `
-        <div class="post" id=${`post_id_${index + 1}`}>
+        <div data-foo class="post" id=${`post_id_${index + 1}`}>
                 <p class="meta"><span class="date">${dateDatePart[0]}, ${dateDatePart[1]} ${dateDatePart[2]}, ${dateDatePart[3]}</span> ${dateTimePart[0]} Posted by<a href="#">${elemet.author}</a>✅</p>
                 <h2 class="title"><a href="${elemet.source[0]}">${elemet.title}</a></h2>
                 <img src="${elemet.IMGurl}" alt="" class="img_post">
@@ -193,7 +178,7 @@ function domParsePosts(data = []) {
 
     postsContainer.insertAdjacentHTML('beforeend', elementContainer.join(' '))
     // Fill the sidebars//
-    domSideBarParse(newDateConverted)
+    from_pagination ? newDateConverted : domSideBarParse(newDateConverted)
 
 }
 
@@ -226,7 +211,8 @@ function domSlideParse(dataslideHow = []) {
 
 function domEntryParser(entry = {}, changes = {}) {
 
-    footer.insertAdjacentHTML('afterbegin', `<p>&copy; copyright ${cpn} team ${curretnDate.getFullYear()} <a href="#" rel="nofollow">Desing</a>.</p>`)
+    footer.insertAdjacentHTML('afterbegin', `<p>&copy; copyright ${cpn} team ${curretnDate.getFullYear()} <a href="#" rel="nofollow">Desing</a>.</p>
+    <spam><a href="./privacy_policy.html">Política de Privacidad</a></spam>`)
 
 
     const documentEntry = document.querySelector('.entry')
@@ -254,7 +240,7 @@ function domPagination(arrayObj = []) {
         Math.floor(arrayObj.length / MAX_OF_INITITAL_POST) : Math.floor(arrayObj.length / MAX_OF_INITITAL_POST) + 1
     let html_content = []
     for (let e = 0; e < paginationBtn; e++) {
-        let HTML_Pagination = `<div class="sub_pag" data="${e}">${e + 1}</div>`
+        let HTML_Pagination = `<a class="sub_pag" href="#page=${e + 1}">${e + 1}</a>`
         html_content.push(HTML_Pagination)
     }
     pagination.insertAdjacentHTML('afterbegin', html_content.join(' '))
@@ -275,12 +261,52 @@ dataExtration.then(data => data.json()).then((dataJson) => {
 
 })
 
+
+let createCopy = []
+let paginationContent = 0
+const paginate = ((items = [], page = 1, perPage = 0) => {
+    createCopy = items
+    if (true) {
+        createCopy = items;
+        paginationContent = items.length % perPage === 0 ?
+            Math.floor(items.length / perPage) : Math.floor(items.length / perPage) + 1
+    }
+    if (perPage > createCopy.length) return { pagination: createCopy, maxOfPages: paginationContent }
+    if (page >= paginationContent) { status_counter = 0; return { pagination: createCopy.slice(perPage * (page - 1)), maxOfPages: paginationContent } }
+    let itemsSliced = createCopy.slice(perPage * (page - 1), perPage * page)
+    // console.log(items.length)
+    // console.log(`implemented = splice(${perPage * (page - 1)}, ${perPage * page})`)
+
+    return { pagination: itemsSliced, maxOfPages: paginationContent }
+});
+
+
+
+
 pagination.addEventListener('click', (ev) => {
+    // console.log('Pagination Action...')
+
     let eventTarget = ev.target.closest('.sub_pag') ? ev.target.closest('.sub_pag') : false
-    if (eventTarget) {
-        let num = Number(eventTarget.textContent)
-        //console.log(paginate(globalArrayObject.posts, page = num, perPage = MAX_OF_INITITAL_POST))
-        // Future Implementation //
+    let eventTargetNext = ev.target.closest('#sub_pag_id') ? ev.target.closest('#sub_pag_id') : false
+    if (eventTarget || eventTargetNext) {
+
+        //if the event was triggered from from the target <a></a> or </next element>
+        status_counter++
+        let num = eventTarget ? Number(eventTarget.textContent) : status_counter
+        if (eventTarget) status_counter = num
+
+
+        // console.log(`${status_counter}==${num}}`)
+        // console.log(paginate(globalArrayObject.posts, page = num, perPage = MAX_OF_INITITAL_POST))
+        let pagination_element = paginate(globalArrayObject.posts, page = num, perPage = MAX_OF_INITITAL_POST)
+
+
+        //removing all the children..//
+        let sde = [...document.querySelectorAll("[data-foo]")]
+        sde.forEach(e => postsContainer.removeChild(e))
+
+        domParsePosts(pagination_element.pagination, from_pagination = true)
+
     }
 })
 domMenu.addEventListener('click', () => {
