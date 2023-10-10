@@ -1,4 +1,4 @@
-const MAX_OF_INITITAL_POST = 4//Posts
+const MAX_OF_INITITAL_POST = 9//Posts
 
 let { browser, device, os, source } = detect.parse(navigator.userAgent)
 
@@ -15,7 +15,7 @@ let postsContainer = document.querySelector('#content')
 let pagination = document.querySelector('.pagination')
 let doc_pagination_next = document.getElementById('sub_pag_id')
 let menuMobile = document.querySelector('.overlay')
-let domMenu = document.querySelector('.closebtn')
+let domMenu = document.querySelector('.overlay-content')
 let menuDesk = document.querySelector('.menu_desk')
 
 let recomendation = document.querySelector('.bg1_rec')
@@ -68,6 +68,37 @@ let showSlides = () => {
 
 
 
+let selectDocm = document.querySelector('.action_transtion')
+let filtetTop = (array = []) => array.posts.filter(element => element.top)
+// Show transition Post//
+let topTrasntion = false
+let transtion_html_content = false
+let previus = 0
+function transtionAction() {
+    let i;
+    if (!topTrasntion) {
+        topTrasntion = filtetTop(globalArrayObject)
+        transtion_html_content = topTrasntion.map(get_element => `<a href="${get_element.source[0]}" class="breking_top">${get_element.title}</a>`)
+        document.querySelector('.action_transtion').insertAdjacentHTML('afterbegin', transtion_html_content.join(' '))
+        transtion_html_content = document.querySelectorAll('.action_transtion a')
+        // console.log(transtion_html_content)
+    }
+
+    for (i = 0; i < transtion_html_content.length; i++) {
+        transtion_html_content[i].style.display = "none";
+    }
+
+    if (previus + 1 > transtion_html_content.length) previus = 0
+
+    transtion_html_content[previus].style.display = "block";
+
+    previus++
+    setTimeout(transtionAction, FOOTER_CONTENT_AMOUNT_1 * 1000); // Change image every 2 seconds
+}
+
+
+
+
 
 function domFooter(data = [], sorElementByLastDate = []) {
 
@@ -109,7 +140,7 @@ function domSideBarParse(data = []) {
     let getTHeFirst = sorElementByLastDate[0]
 
     let HTML_Rec = `
-                    <img src="${getTHeFirst.dataElement.IMGurl}" alt="content_recomendation" class="img_post">
+                    <img src="${getTHeFirst.dataElement.IMGurl}" alt="content_recomendation" class="img_post_reco">
                     <div id="bg2">
                         <spam class="spam_recomendation">${getTHeFirst.dataElement.title}</spam>
                         <p>${getTHeFirst.dataElement.content.inf}</p>
@@ -156,19 +187,25 @@ function domParsePosts(data = [], from_pagination = false) {
     newArray.sort((elementA, elementB) => elementA.formatDate > elementB.formatDate ? -1 : 1).forEach((elemet, index, arr) => {
         //const { year, monthIndex, day, hour, minutes } = elemet.date
         let date = dateConvertion(elemet.date)
-        let dateDatePart = date.toDateString().split(' ')
-        let dateTimePart = date.toTimeString().split(' ')
-
+        let get_local_timer = date.toLocaleString('es-US',)
         //Are sort by Date (Current ->to-> the Last)
         let placeHolderPost = `
         <div data-foo class="post" id=${`post_id_${index + 1}`}>
-                <p class="meta"><span class="date">${dateDatePart[0]}, ${dateDatePart[1]} ${dateDatePart[2]}, ${dateDatePart[3]}</span> ${dateTimePart[0]} Posted by<a href="#">${elemet.author}</a>✅</p>
-                <h2 class="title"><a href="${elemet.source[0]}">${elemet.title}</a></h2>
+        <div class="while_div_device">
+             <p class="meta"><span class="date">${get_local_timer}</span> Autor <a href="#">${elemet.author}</a>✅</p>
+             <h2 class="title"><a href="${elemet.source[0]}">${elemet.title}</a></h2>
+          </div>
+           <div class="father_while_div">
                 <img src="${elemet.IMGurl}" alt="" class="img_post">
+            </div>
                 <div class="entry">
+                   <div class="while_div">
+                      <p class="meta"><span class="date">${get_local_timer}</span> Autor <a href="#">${elemet.author}</a>✅</p>
+                     <h2 class="title"><a href="${elemet.source[0]}">${elemet.title}</a></h2>
+                   </div>
                     <p class="post_meta">${elemet.content.inf}.</p>
+                    <div><a href="${elemet.source[0]}" class="links">${elemet.link_action}</a></div>
                 </div>
-                <div><a href="${elemet.source[0]}" class="links">${elemet.link_action}</a></div>
         </div>`
 
         //Total max of posts//
@@ -205,7 +242,9 @@ function domSlideParse(dataslideHow = []) {
 
     //Inser thr new created html//
     slidesContainer.insertAdjacentHTML('afterbegin', domHtml.join(' '))
+
     showSlides()
+    transtionAction()
 }
 
 
@@ -223,12 +262,11 @@ function domEntryParser(entry = {}, changes = {}) {
 
     const documentEntryPost = document.getElementById('entry_post')
     let date = dateConvertion(changes.date)
-    let dateDatePart = date.toDateString().split(' ')
-    let dateTimePart = date.toTimeString().split(' ')
+    let dateTimePart = date.toLocaleString('es-US',)
     let entryPostPlaceHolder = `
              <p class="meta">
-                <span class="date">${dateDatePart[0]}, ${dateDatePart[1]} ${dateDatePart[2]}, ${dateDatePart[3]}</span>
-                <a href="#">${dateTimePart[0]} last Update Update</a>
+                <span class="date">${dateTimePart}</span>
+                <a href="#">Actualizado</a>
             </p> 
             <h2 class="title"><a href="#">${cpn}</a></h2>`
     documentEntryPost.insertAdjacentHTML('afterbegin', entryPostPlaceHolder)
@@ -308,10 +346,10 @@ pagination.addEventListener('click', (ev) => {
         domParsePosts(pagination_element.pagination, from_pagination = true)
 
     }
+
 })
-domMenu.addEventListener('click', () => {
-    menuMobile.classList.toggle('overlayDisplay')
-    domMenu.classList.toggle('closebtn_open')
-    domMenu.classList.toggle('closebtn')
+domMenu.addEventListener('change', (ev) => {
+    // console.log(`Traking Selection... {}`)
+    window.location.href = ev.target.value
 
 })

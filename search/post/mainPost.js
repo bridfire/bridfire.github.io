@@ -9,7 +9,7 @@ let postsContainer = document.querySelector('#content')
 
 
 let menuMobile = document.querySelector('.overlay')
-let domMenu = document.querySelector('.closebtn')
+let domMenu = document.querySelector('.overlay-content')
 let menuDesk = document.querySelector('.menu_desk')
 
 let recomendation = document.querySelector('.bg1_rec')
@@ -25,6 +25,7 @@ const FOOTER_CONTENT_AMOUNT_2 = 5
 const DOM_FOOTER_1 = document.querySelector('#post_container_1')
 const DOM_FOOTER_2 = document.querySelector('#post_container_2')
 
+let globalArrayObject = []
 let footer = document.getElementById('footer')
 let curretnDate = new Date()
 
@@ -49,6 +50,33 @@ let randomObjectArray = (array = []) => {
 
 
 
+let selectDocm = document.querySelector('.action_transtion')
+let filtetTop = (array = []) => array.posts.filter(element => element.top)
+// Show transition Post//
+let topTrasntion = false
+let transtion_html_content = false
+let previus = 0
+function transtionAction() {
+    let i;
+    if (!topTrasntion) {
+        topTrasntion = filtetTop(globalArrayObject)
+        transtion_html_content = topTrasntion.map(get_element => `<a href="${get_element.source[2]}" class="breking_top">${get_element.title}</a>`)
+        document.querySelector('.action_transtion').insertAdjacentHTML('afterbegin', transtion_html_content.join(' '))
+        transtion_html_content = document.querySelectorAll('.action_transtion a')
+        console.log(transtion_html_content)
+    }
+
+    for (i = 0; i < transtion_html_content.length; i++) {
+        transtion_html_content[i].style.display = "none";
+    }
+
+    if (previus + 1 > transtion_html_content.length) previus = 0
+
+    transtion_html_content[previus].style.display = "block";
+
+    previus++
+    setTimeout(transtionAction, FOOTER_CONTENT_AMOUNT_1 * 1000); // Change image every 2 seconds
+}
 
 
 function domFooter(data = [], sorElementByLastDate = []) {
@@ -122,6 +150,7 @@ function domParsePosts(data = []) {
 
     domFooter(data, sortter)
     domSideBarParse(data)
+    transtionAction()
 
 }
 
@@ -129,6 +158,7 @@ function domParsePosts(data = []) {
 
 const dataExtration = fetch('../../contentJson/settings.json')
 dataExtration.then(data => data.json()).then((dataJson) => {
+    globalArrayObject = dataJson
     document.body.style.overflow = 'hidden'
     domParsePosts(dataJson.posts)
     document.body.style.overflow = 'scroll'
@@ -140,5 +170,12 @@ domMenu.addEventListener('click', () => {
     menuMobile.classList.toggle('overlayDisplay')
     domMenu.classList.toggle('closebtn_open')
     domMenu.classList.toggle('closebtn')
+
+})
+
+
+domMenu.addEventListener('change', (ev) => {
+    // console.log(`Traking Selection... {}`)
+    window.location.href = ev.target.value
 
 })

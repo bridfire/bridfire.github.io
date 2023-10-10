@@ -8,7 +8,7 @@ let slidesContainer = document.querySelector('.slideshow-container')
 let postsContainer = document.querySelector('#content')
 
 let menuMobile = document.querySelector('.overlay')
-let domMenu = document.querySelector('.closebtn')
+let domMenu = document.querySelector('.overlay-content')
 let menuDesk = document.querySelector('.menu_desk')
 
 
@@ -24,7 +24,7 @@ const FOOTER_CONTENT_AMOUNT_1 = 3
 const FOOTER_CONTENT_AMOUNT_2 = 5
 const DOM_FOOTER_1 = document.querySelector('#post_container_1')
 const DOM_FOOTER_2 = document.querySelector('#post_container_2')
-
+let globalArrayObject = []
 let footer = document.getElementById('footer')
 let curretnDate = new Date()
 
@@ -46,6 +46,38 @@ let randomObjectArray = (array = []) => {
     array.splice(ramdom, 1)
     return ramdomElement
 }
+
+
+
+let selectDocm = document.querySelector('.action_transtion')
+let filtetTop = (array = []) => array.posts.filter(element => element.top)
+// Show transition Post//
+let topTrasntion = false
+let transtion_html_content = false
+let previus = 0
+function transtionAction() {
+    let i;
+    if (!topTrasntion) {
+        topTrasntion = filtetTop(globalArrayObject)
+        transtion_html_content = topTrasntion.map(get_element => `<a href="${get_element.source[1]}" class="breking_top">${get_element.title}</a>`)
+        document.querySelector('.action_transtion').insertAdjacentHTML('afterbegin', transtion_html_content.join(' '))
+        transtion_html_content = document.querySelectorAll('.action_transtion a')
+        // console.log(transtion_html_content)
+    }
+
+    for (i = 0; i < transtion_html_content.length; i++) {
+        transtion_html_content[i].style.display = "none";
+    }
+
+    if (previus + 1 > transtion_html_content.length) previus = 0
+
+    transtion_html_content[previus].style.display = "block";
+
+    previus++
+    setTimeout(transtionAction, FOOTER_CONTENT_AMOUNT_1 * 1000); // Change image every 2 seconds
+}
+
+
 
 
 
@@ -124,24 +156,34 @@ function domParsePosts(data = []) {
         //const { year, monthIndex, day, hour, minutes } = elemet.date
 
         let date = dateConvertion(elemet.date)
-        let dateDatePart = date.toDateString().split(' ')
-        let dateTimePart = date.toTimeString().split(' ')
+        let get_local_timer = date.toLocaleString('es-US',)
 
         //Are sort by Date (Current ->to-> the Last)
         let placeHolderPost = `
-        <div class="post" id=${`post_id_${index + 1}`}>
-                <p class="meta"><span class="date">${dateDatePart[0]}, ${dateDatePart[1]} ${dateDatePart[2]}, ${dateDatePart[3]}</span> ${dateTimePart[0]} Posted by<a href="#">${elemet.author}</a>✅</p>
-                <h2 class="title"><a href="${elemet.source[1]}">${elemet.title}</a></h2>
+        <div data-foo class="post" id=${`post_id_${index + 1}`}>
+          <div class="while_div_device">
+            <p class="meta"><span class="date">${get_local_timer}</span> Autor <a href="#">${elemet.author}</a>✅</p>
+            <h2 class="title"><a href="${elemet.source[1]}">${elemet.title}</a></h2>
+           </div>
+           <div class="father_while_div">
                 <img src="${elemet.IMGurl}" alt="" class="img_post">
+            </div>
                 <div class="entry">
+                   <div class="while_div">
+                      <p class="meta"><span class="date">${get_local_timer}</span> Autor <a href="#">${elemet.author}</a>✅</p>
+                     <h2 class="title"><a href="${elemet.source[1]}">${elemet.title}</a></h2>
+                   </div>
                     <p class="post_meta">${elemet.content.inf}.</p>
+                    <div><a href="${elemet.source[1]}" class="links">${elemet.link_action}</a></div>
                 </div>
-                <div><a href="${elemet.source[1]}" class="links">${elemet.link_action}</a></div>
         </div>`
 
         elementContainer.push(placeHolderPost)
         newDateConverted.push({ dataElement: elemet, dataDate: date })
     })
+
+
+    transtionAction()
     postsContainer ? postsContainer.insertAdjacentHTML('beforeend', elementContainer.join(' ')) : ''
     domFooter(data, sortter)
     postsContainer ? domSideBarParse(data) : ''
@@ -152,6 +194,8 @@ function domParsePosts(data = []) {
 
 const dataExtration = fetch('../../contentJson/settings.json')
 dataExtration.then(data => data.json()).then((dataJson) => {
+    globalArrayObject = dataJson
+
     document.body.style.overflow = 'hidden'
     domParsePosts(dataJson.posts)
     document.body.style.overflow = 'scroll'
@@ -159,9 +203,8 @@ dataExtration.then(data => data.json()).then((dataJson) => {
 
 })
 
-domMenu.addEventListener('click', () => {
-    menuMobile.classList.toggle('overlayDisplay')
-    domMenu.classList.toggle('closebtn_open')
-    domMenu.classList.toggle('closebtn')
+domMenu.addEventListener('change', (ev) => {
+    // console.log(`Traking Selection... {}`)
+    window.location.href = ev.target.value
 
 })

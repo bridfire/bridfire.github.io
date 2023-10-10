@@ -1,3 +1,7 @@
+body {
+    font-size: 18px;
+}
+
 .dom_header {
     width: inherit;
     display: flex;
@@ -130,4 +134,70 @@
     color: #0094BC;
     background: #fff;
     border-color: #0094BC;
+}
+
+.post {
+    padding-bottom: 30px;
+    display: flex;
+    border-bottom: #203253 dashed 1px;
+    flex-direction: column;
+    align-items: center;
+}
+
+p,
+ul,
+ol {
+    margin-top: 0;
+    line-height: 14px;
+    /* text-align: justify; */
+    overflow: hidden;
+    text-align: justify;
+    font-size: 13px;
+}
+
+.img_media {
+    display: block;
+    position: relative;
+    width: 30%;
+}
+
+@media (min-width: 200px) and (max-width: 435PX) {
+    #logo2>img {
+        width: 50%;
+    }
+
+    .img_media {
+        display: -webkit-inline-box;
+        position: relative;
+        width: 30%;
+    }
+
+    #page {
+        /* margin: 0px 20px auto; */
+        /* padding: 4px; */
+        display: flex;
+        justify-content: center;
+        /* margin-top: 40px;*/
+    }
+
+    #logo {
+        margin: auto;
+        padding: 48px 0px 1px 0px;
+        text-transform: unset;
+        display: none;
+        flex-direction: column;
+    }
+
+    .overlay {
+        width: -webkit-fill-available;
+        /* position: fixed; */
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.9);
+        overflow-x: hidden;
+        transition: 0.5s;
+    }
+
 }

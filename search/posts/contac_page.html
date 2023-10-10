@@ -10,11 +10,23 @@
     <link href="../../style.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="./contan_dir.css" rel="stylesheet" type="text/css" media="screen" />
     <link rel="shortcut icon" href="../../images/image (1).png" />
+    <link rel="icon" type="image/png" href="../../images/image (1).png">
+    <link rel="icon" type="image/x-icon" href="../../images/image (1).png">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6752818572008532"
         crossorigin="anonymous"></script>
 </head>
 
 <body>
+    <div class="header_news_transtion">
+        <h4 class="title_top">TOP 10</h4>
+        <span class="action_transtion">
+            <!-- <a href="#"class="breking_top_active"></a> -->
+        </span>
+    </div>
+    <div id="logo2">
+        <img src="../../images/image (1).png" class="img_logo" alt="logo">
+        <h2 id="cross_dw">Dando Lo Mejor</h2>
+    </div>
     <div id="header">
         <div id="menu">
             <ul class="menu_desk">
@@ -26,29 +38,34 @@
 
             <!-- nnavegator var -->
             <div id="myNav" class="overlay">
-                <div href="javascript:void(0)" class="closebtn">&times;</div>
-                <div class="overlay-content">
-                    <a href="../../index.html">Home</a>
-                    <a href="./index.html">Articulos</a>
-                    <a href="#">CONTACTANOS</a>
-                </div>
+                <!-- <div href="javascript:void(0)" class="closebtn">&times;</div> -->
+                <select class="overlay-content">
+                    <option value="../../index.html"><a href="../../index.html">Home</a></option>
+                    <option value="./index.html"><a href="./search/posts/index.html">Articulos</a></option>
+                    <option value="#" selected><a href="./contac_page.html">CONTACTANOS</a></option>
+                </select>
             </div>
         </div>
         <!-- end #menu -->
-        <div id="logo">
+        <!-- <div id="logo">
             <img src="../../images/image (1).png" class="img_logo" alt="logo">
             <h2 id="cross_dw">Dando Lo Mejor</h2>
-        </div>
+        </div> -->
         <hr />
     </div>
     <div id="page">
         <div id="page-bgtop">
             <h3>CONTACTA CON NOSOTROS</h3>
-            <p>
+            <p class="post_page">
                 Oye, gracias por tu visita. Si desea comunicarse con nosotros, puede enviar un mensaje de texto por
                 correo electrónico. Responderemos lo más rápido posible; No olvides que sin ti y tus comentarios, no
                 podemos brindar el mejor contenido, así que no dudes en enviarnos tus comentarios y cualquier
                 pregunta.
+            </p>
+            <p class="post_page">
+                Hey dude, también si quieres aportar con algún tema que sepas acerca de videojuegos puedes comunicarte
+                con nosotros utilizando tu email, serviría para aportar a la comunidad y al mismo tiempo más personas
+                sepan de estos nuevos temas. 
             </p>
         </div>
 
@@ -67,12 +84,55 @@
 
             <textarea id="text_box" class="input" type="text-box" placeholder="Mensaje"></textarea>
 
-            <input type="hidden" name="_next" value="http://bridfire.com">
-            <input type="hidden" name="_captcha" value="false">
-
+            <input type="hidden" name="_captcha" value="true">
             <button type="text" class="submit">Enviar</button>
         </form>
 
+    </div>
+    <div id="social">
+        <!-- <a class="facebookBtn smGlobalBtn" href="#"></a> -->
+        <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="35" viewBox="0,0,256,256"
+                style="fill:#FFFFFF;">
+                <g fill="#000000" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                    stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                    font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                    style="mix-blend-mode: normal">
+                    <path d="M0,256v-256h256v256z" id="bgRectangle"></path>
+                </g>
+                <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                    stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                    font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                    style="mix-blend-mode: normal">
+                    <g transform="scale(9.84615,9.84615)">
+                        <path
+                            d="M7.54688,0c-4.15625,0 -7.54687,3.39063 -7.54687,7.54688v10.90625c0,4.15625 3.39063,7.54688 7.54688,7.54688h10.90625c4.15625,0 7.54688,-3.39062 7.54688,-7.54687v-10.90625c0,-4.15625 -3.39062,-7.54687 -7.54687,-7.54687zM7.54688,2h10.90625c3.07422,0 5.54688,2.46875 5.54688,5.54688v10.90625c0,3.07422 -2.46875,5.54688 -5.54687,5.54688h-10.90625c-3.07422,0 -5.54687,-2.46875 -5.54687,-5.54687v-10.90625c0,-3.07422 2.46875,-5.54687 5.54688,-5.54687zM20.5,4c-0.82812,0 -1.5,0.67188 -1.5,1.5c0,0.82813 0.67188,1.5 1.5,1.5c0.82813,0 1.5,-0.67187 1.5,-1.5c0,-0.82812 -0.67187,-1.5 -1.5,-1.5zM13,6c-3.85547,0 -7,3.14453 -7,7c0,3.85547 3.14453,7 7,7c3.85547,0 7,-3.14453 7,-7c0,-3.85547 -3.14453,-7 -7,-7zM13,8c2.77344,0 5,2.22656 5,5c0,2.77344 -2.22656,5 -5,5c-2.77344,0 -5,-2.22656 -5,-5c0,-2.77344 2.22656,-5 5,-5z">
+                        </path>
+                    </g>
+                </g>
+            </svg>
+        </a>
+        <a href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" height="35" viewBox="0,0,256,256"
+                style="fill:#FFFFFF;">
+                <g fill="#080808" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                    stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                    font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                    style="mix-blend-mode: normal">
+                    <path d="M0,256v-256h256v256z" id="bgRectangle"></path>
+                </g>
+                <g fill="#ffffff" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
+                    stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                    font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                    style="mix-blend-mode: normal">
+                    <g transform="scale(9.84615,9.84615)">
+                        <path
+                            d="M13,0c-7.18,0 -13,5.82 -13,13c0,6.518 4.801,11.899 11.057,12.839v-9.394h-3.217v-3.417h3.217v-2.274c0,-3.765 1.834,-5.417 4.963,-5.417c1.498,0 2.291,0.111 2.666,0.162v2.983h-2.134c-1.328,0 -1.792,1.259 -1.792,2.679v1.868h3.893l-0.528,3.417h-3.365v9.422c6.345,-0.862 11.24,-6.287 11.24,-12.868c0,-7.18 -5.82,-13 -13,-13z">
+                        </path>
+                    </g>
+                </g>
+            </svg>
+        </a>
     </div>
     <div id="footer-bgcontent">
         <div id="footer">
@@ -80,9 +140,9 @@
 
         <!-- Users Online -->
         <div class="activity_box">
-            <script
+            <!-- <script
                 id="_waud3k">var _wau = _wau || []; _wau.push(["dynamic", "5f6g6z6rrc", "d3k", "4e4444ffffff", "small"]);</script>
-            <script async src="//waust.at/d.js"></script>
+            <script async src="//waust.at/d.js"></script> -->
         </div>
         <!-- Users Online -->
 
