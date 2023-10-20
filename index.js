@@ -285,6 +285,7 @@ function domPagination(arrayObj = []) {
 }
 
 //Main init//
+// Parsing  
 const dataExtration = fetch('./contentJson/settings.json')
 dataExtration.then(data => data.json()).then((dataJson) => {
     globalArrayObject = dataJson
